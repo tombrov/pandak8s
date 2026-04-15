@@ -1,0 +1,27 @@
+# Local override values for running pandak8s on a kind cluster.
+# Usage with ArgoCD CLI:
+#   argocd app create pandak8s ... --values values-local.yaml
+# Usage with helm directly:
+#   helm install pandak8s ./pandak8s -f pandak8s/values-local.yaml -n pandak8s --create-namespace
+
+ingress-nginx:
+  controller:
+    service:
+      type: NodePort
+      annotations: {}
+
+frontend:
+  replicaCount: 1
+  image:
+    repository: brovy/pandak8s-frontend
+    tag: latest
+    pullPolicy: Never
+  env:
+    backendHost: backend
+
+backend:
+  replicaCount: 1
+  image:
+    repository: brovy/pandak8s-backend
+    tag: latest
+    pullPolicy: Never
