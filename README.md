@@ -15,9 +15,8 @@ This repo sets up:
 ## Repository Structure
 
 ```
-Vicarius/
+pandak8s/
 ├── .github/                 # GitHub Actions workflows
-├── argocd/                  # Argo CD Helm chart and configuration
 ├── app/                     # Application source code
 ├── pandak8s/                # Kubernetes manifests
 ├── terraform/               # Terraform configuration
@@ -45,8 +44,10 @@ Vicarius/
 3. Application is deployed to EKS cluster
 
 ## Cloud Architecture Diagram
-![Cloud Architecture Diagram](./docs/cloud_architecture.png)
+
+Cloud Architecture Diagram
 This diagram illustrates the AWS infrastructure deployed in the us-east-1 region.
+
 - VPC: A dedicated Virtual Private Cloud named barkuni-pandak8s-vpc spans across multiple Availability Zones (AZs): us-east-1a, us-east-1b, and us-east-1c.
 - Public and Private Subnets: Each AZ contains both public and private subnets. Public subnets are used for the NAT Gateway and Load Balancer, while private subnets host the EKS worker nodes.
 - Internet Gateway: Enables public internet access for components like the Load Balancer.
@@ -56,21 +57,22 @@ This diagram illustrates the AWS infrastructure deployed in the us-east-1 region
 - EKS Nodes: Represented as T2 instances within the private subnets; they run the actual application workloads (pods).
 
 ## k8s Architecture Diagram
-![Cloud Architecture Diagram](./docs/k8s_architecture.png)
-This diagram describes the internal Kubernetes architecture running on EKS.
-- Control Plane:
-    - API Server: Central management point for the Kubernetes cluster.
-    - Scheduler: Assigns pods to nodes based on resource availability. 
-    - Controller Manager (c-m): Handles node management, replication, and endpoint controllers.
-    - Cloud Controller Manager (c-c-m): Manages cloud-specific controller logic (e.g., ELB). 
-    - etcd: Stores all cluster configuration data.
-- Worker Nodes (Node 1 & Node 2):
-    - Kubelet: Agent running on each node, responsible for pod lifecycle management.
-    - Kube Proxy: Handles network communication and maintains rules on each node.
-    - Pods:
-      - Frontend Deployment: Runs on Node 1. Consists of a main pod and replicas. 
-      - Backend Deployment: Runs on Node 2. Consists of a main pod and replicas.
 
+Cloud Architecture Diagram
+This diagram describes the internal Kubernetes architecture running on EKS.
+
+- Control Plane:
+  - API Server: Central management point for the Kubernetes cluster.
+  - Scheduler: Assigns pods to nodes based on resource availability. 
+  - Controller Manager (c-m): Handles node management, replication, and endpoint controllers.
+  - Cloud Controller Manager (c-c-m): Manages cloud-specific controller logic (e.g., ELB). 
+  - etcd: Stores all cluster configuration data.
+- Worker Nodes (Node 1 & Node 2):
+  - Kubelet: Agent running on each node, responsible for pod lifecycle management.
+  - Kube Proxy: Handles network communication and maintains rules on each node.
+  - Pods:
+    - Frontend Deployment: Runs on Node 1. Consists of a main pod and replicas. 
+    - Backend Deployment: Runs on Node 2. Consists of a main pod and replicas.
 
 ## 🔐 Secrets and Access
 
