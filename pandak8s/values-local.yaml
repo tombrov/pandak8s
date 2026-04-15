@@ -15,7 +15,7 @@ frontend:
   image:
     repository: brovy/pandak8s-frontend
     tag: latest
-    pullPolicy: Never
+    pullPolicy: IfNotPresent
   env:
     backendHost: backend
 
@@ -24,4 +24,4 @@ backend:
   image:
     repository: brovy/pandak8s-backend
     tag: latest
-    pullPolicy: Never
+    pullPolicy: IfNotPresent
